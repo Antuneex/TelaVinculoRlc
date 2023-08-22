@@ -1,70 +1,10 @@
-const sql = require("mssql");
-const express = require('express');
 const fs = require("fs");
+const path = require('path');
 
-const css = fs.readFileSync("./page.css");
+const cssPath = path.join(__dirname, '..', 'public', 'page.css');
+const css = fs.readFileSync(cssPath, 'utf8');
 
-const app = express();
-app.use(express.urlencoded());
-
-const config = {
-	user: 'homolog',
-	password: 'Homo1452@',
-	server: '10.30.26.4', 
-	database: 'GrupoKasilHomolog' 
-};
-
-async function getData() {
-	try{
-		const conn = await sql.connect(config);
-		const { recordset } = await conn.query('SELECT f.Cod_Fil, f.Nom_Fil, e.Cod_Emp, e.Nom_Emp FROM [dbo].[GKS_Empresas] e WITH(NOLOCK) INNER JOIN [dbo].[GKS_Filiais] f WITH(NOLOCK) ON f.Cod_Emp = e.Cod_Emp');
-
-		let empresa = '';
-		const filial = {};
-		for(const item of recordset) {
-			const temp = `<option value="${item.Cod_Emp}">${item.Cod_Emp} - ${item.Nom_Emp}</option>`;
-			if (!empresa.includes(temp)) {
-				empresa += temp
-			}
-
-			if (!filial[item.Cod_Emp]) {
-				filial[item.Cod_Emp] = '';
-			}
-			filial[item.Cod_Emp] += `<option value="${item.Cod_Fil}">${item.Cod_Fil} - ${item.Nom_Fil}</option>`;
-		}
-
-		conn.close();
-
-		return {
-			empresa,
-			filial
-		};
-	} catch (err) {
-		console.log(err);
-	}
-}
-
-async function runProcVinculo(form) {
-	try{
-		const conn = await sql.connect(config);
-		await conn.query(`EXEC [dbo].[GKSSP_VinculaNfRLC] '${form.nota}', '${form.cpf_cnpj}', ${form.empresa}, ${form.filial}, ${form.ano}, ${form.mes}, ${form.linha}, ${form.rlc}`);
-		conn.close();
-	} catch (err) {
-		console.error(err);
-	}
-}
-
-async function runProcDesvinculo(form) {
-	try{
-		const conn = await sql.connect(config);
-		await conn.query(`EXEC [dbo].[GKSSP_DesvincularNfRLC] '${form.nota}', '${form.cpf_cnpj}', ${form.empresa}, ${form.filial}, ${form.ano}, ${form.mes}, ${form.linha}, ${form.rlc}`);
-		conn.close();
-	} catch (err) {
-		console.error(err);
-	}
-}
-
-function getPage(data) {
+module.exports = function getPage(data) {
 	return `
 		<!DOCTYPE html>
 	
@@ -348,22 +288,3 @@ function getPage(data) {
 		</script>
 	`
 }
-
-app.get('/vincula-rlc', (_req, res) => {
-	getData().then((data) => {
-		res.send(getPage(data));
-	});
-});
-
-app.post('/vincula-rlc', (req, res) => {
-	console.log(req.body);
-	getData().then((data) => {
-		res.send(getPage(data));
-	});
-
-	// runProcVinculo(req.body).then(() => getData().then((data) => {
-	// 	res.send(getPage(data) + '<script>alert("RLC vinculada com sucesso!")</script>');
-	// }));
-});
-
-app.listen(5516);
