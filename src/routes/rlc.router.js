@@ -3,16 +3,13 @@ const rlcRoutes = express.Router();
 
 const BuildPageController = require('../controllers/BuildPageController')
 const VinculaRLCController = require('../controllers/VinculaRLCController')
-const DesvinculaRLCController = require('../controllers/DesvinculaRLCController')
+const RLCController = require('../controllers/RLCController')
 
 
 const buildPageController = new BuildPageController()
-const vinculaRLCController = new VinculaRLCController()
-const desvinculaRLCController = new DesvinculaRLCController()
+const rlcController = new RLCController()
 
 rlcRoutes.get('/', buildPageController.execute);
-rlcRoutes.post('/vinculo', vinculaRLCController.execute);
-rlcRoutes.post('/desvinculo', desvinculaRLCController.execute)
-
+rlcRoutes.post('/', rlcController.execute);
 
 module.exports = rlcRoutes

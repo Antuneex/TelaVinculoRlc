@@ -15,7 +15,7 @@ module.exports = function getPage(data) {
 		<body>
 	
 		<div style="max-width: 1280px; margin: 0 auto;">
-        <form method="POST" class="ui-card" action="http://localhost:5516/vincula-rlc/vinculo" style="margin: 16px;">
+        <form method="POST" class="ui-card" action="http://localhost:5516/vincula-rlc" style="margin: 16px;">
 		<div class="ui-card-title">Vinculo / Desvinculo RLC</div>
 			<div class="ui-card" style="margin: 16px; margin: 16px; margin-top: 40px;">
             <div class="ui-card-content">

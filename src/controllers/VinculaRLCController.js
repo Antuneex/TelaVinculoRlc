@@ -9,9 +9,8 @@ class VinculaRLCController {
 
 			// await runProcVinculo(req.body)
 			const data = await getData()
-			Console.log(data);
 			// res.send(getPage(data) + '<script>alert("RLC vinculada com sucesso!")</script>');
-			res.send(data);
+			//res.send(data);
 
 		} catch(err) {
 			res.json({error: err})
