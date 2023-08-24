@@ -6,17 +6,16 @@ class DesvinculaRLCController {
     async execute(req, res) {
         try {
 			console.log(req.body);			
-			// await runProcDesvinculo(req.body)
-            
-			const data = await getData()
-            Console.log(data);
-			// res.send(getPage(data) + '<script>alert("RLC Desvinculada com sucesso!")</script>');
-            res.send(data);
+	    	const data = await getData()
+			res.send(getPage(data));
 
+			//await runProcVinculo(req.body)
+			//const data = await getData()
+			//res.send(getPage(data) + '<script>alert("RLC vinculada com sucesso!")</script>');
 		} catch(err) {
 			res.json({error: err})
 		}
     }
 }
 
-module.exports = VinculaRLCController
+module.exports = DesvinculaRLCController
