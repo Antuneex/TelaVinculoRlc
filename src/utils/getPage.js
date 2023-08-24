@@ -15,7 +15,7 @@ module.exports = function getPage(data) {
 		<body>
 	
 		<div style="max-width: 1280px; margin: 0 auto;">
-        <form method="POST" class="ui-card" action="http://localhost:5516/vincula-rlc" style="margin: 16px;">
+        <form method="POST" class="ui-card" action="http://localhost:5516/vincula-rlc/vinculo" style="margin: 16px;">
 		<div class="ui-card-title">Vinculo / Desvinculo RLC</div>
 			<div class="ui-card" style="margin: 16px; margin: 16px; margin-top: 40px;">
             <div class="ui-card-content">
@@ -103,15 +103,51 @@ module.exports = function getPage(data) {
 				<div class="ui-flex-container break-on-s600">
 					<div class="ui-input-container" style="max-width: 100%;"><div class="ui-input-wrap">
 						<select class="ui-control " id="linha" name="linha" ="">
-								<option value="1">
-									1
-								</option>
-								<option value="2">
-									2
-								</option>
-								<option value="3">
-									3
-								</option>
+						<option value="1">
+						1
+					</option>
+					<option value="2">
+						2
+					</option>
+					<option value="3">
+						3
+					</option>
+					<option value="4">
+						4
+					</option>
+					<option value="5">
+						5
+					</option>
+					<option value="6">
+						6
+					</option>
+					<option value="7">
+						7
+					</option>
+					<option value="8">
+						8
+					</option>
+					<option value="9">
+						9
+					</option>
+					<option value="10">
+						10
+					</option>
+					<option value="11">
+						11
+					</option>
+					<option value="12">
+						12
+					</option>
+					<option value="13">
+						13
+					</option>
+					<option value="14">
+						14
+					</option>
+					<option value="15">
+						15
+					</option>
 						</select>
 						<label for="linha">Nº Linha</label>
 					<div class="line"></div></div></div>
@@ -186,15 +222,51 @@ module.exports = function getPage(data) {
 				<div class="ui-flex-container break-on-s600">
 					<div class="ui-input-container" style="max-width: 100%;"><div class="ui-input-wrap">
 						<select class="ui-control " id="DesvinculoLinha" name="DesvinculoLinha" ="">
-								<option value="1">
+						<option value="1">
 									1
 								</option>
-								<option value="2">
+							<option value="2">
 									2
 								</option>
-								<option value="3">
+							<option value="3">
 									3
 								</option>
+							<option value="4">
+									4
+								</option>
+							<option value="5">
+									5
+								</option>
+							<option value="6">
+									6
+								</option>
+							<option value="7">
+									7
+								</option>
+							<option value="8">
+									8
+								</option>
+							<option value="9">
+									9
+								</option>
+							<option value="10">
+									10
+								</option>
+							<option value="11">
+									11
+								</option>
+							<option value="12">
+									12
+								</option>
+							<option value="13">
+									13
+								</option>
+							<option value="14">
+									14
+								</option>
+							<option value="15">
+									15
+								</option>		
 						</select>
 						<label for="DesvinculoLinha">Nº Linha</label>
 					<div class="line"></div></div></div>
