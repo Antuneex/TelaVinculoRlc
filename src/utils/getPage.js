@@ -5,6 +5,7 @@ const cssPath = path.join(__dirname, '..', 'public', 'page.css');
 const css = fs.readFileSync(cssPath, 'utf8');
 
 module.exports = function getPage(data) {
+	console.log('data', data)
 	return `
 		<!DOCTYPE html>
 	

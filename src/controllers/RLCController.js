@@ -7,15 +7,8 @@ class RLCController {
 	constructor() {}
     async execute(req, res) {
         try {
-			//console.log(req.body);
-			await rlcService.execute(req.body)			
-			// await runProcDesvinculo(req.body)
-            
-			const data = await getData()
-			res.send(getPage(data));
-			// res.send(getPage(data) + '<script>alert("RLC Desvinculada com sucesso!")</script>');
-            //res.send(data);
-
+			const {responseMessage, data} = await rlcService.execute(req.body)			
+			res.send(getPage(data) + `<script>alert('${responseMessage}')</script>`);
 		} catch(err) {
 			res.json({error: err})
 		}

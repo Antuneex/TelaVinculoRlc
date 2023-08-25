@@ -1,26 +1,32 @@
-const filterRLCParams = require('../helpers/filterRLCParams')
-const filterVinculoRLCParams = require('../helpers/filterVinculoRLCParams')
+const filterVinculoRLC = require('../helpers/filterVinculoRLC')
+const filterDesvinculoRLC = require('../helpers/filterDesvinculoRLC')
+const mountResponseMessage = require('../helpers/mountResponseMessage')
+
 const runProcVinculo = require('../utils/runProcVinculo')
+const runProcDesvinculo = require('../utils/runProcDesvinculo')
+const getData = require('../utils/getData')
 
 class RLCService {
-    async execute(rlcParameters) {
+    async execute(rlcObject) {
         try {
-            const vinculaRLCParams = filterRLCParams(rlcParameters, '')
-            let desvinculaRLCParams = filterRLCParams(rlcParameters, 'Desvinculo')
+            const {rlc, DesvinculoRlc} = rlcObject
 
-            if(Object.keys(vinculaRLCParams).length > 0) {
-                console.log('VINCULA!!!', vinculaRLCParams)
+            if(rlc) {
+                const vinculoRLC = filterVinculoRLC(rlcObject)
+                console.log(vinculoRLC, 'VINCULA!!!')
+                //await runProcVinculo(vinculoRLC)
             }
 
-            if(Object.keys(desvinculaRLCParams).length > 0) {
-                desvinculaRLCParams = {
-                    nota: rlcParameters.nota, 
-                    cpf_cnpj: rlcParameters.cpf_cnpj, 
-                    ...desvinculaRLCParams
-                }
-                console.log('DESVINCULA!!!', desvinculaRLCParams)
+            if(DesvinculoRlc) {
+                const desvinculoRLC = filterDesvinculoRLC(rlcObject)
+                console.log(desvinculoRLC, 'DESVINCULA!!!')
+                //await runProcDesvinculo(desvinculoRLC)
             }
+            
+            const data = await getData()
+            const responseMessage = mountResponseMessage(rlcObject)
 
+            return {data, responseMessage}
 		} catch(err) {
 			res.json({error: err})
 		}
