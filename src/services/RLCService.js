@@ -7,24 +7,24 @@ const runProcDesvinculo = require('../utils/runProcDesvinculo')
 const getData = require('../utils/getData')
 
 class RLCService {
-    async execute(rlcObject) {
+    async execute(rlcInput) {
         try {
-            const {rlc, DesvinculoRlc} = rlcObject
+            const {rlc, DesvinculoRlc} = rlcInput
 
             if(rlc) {
-                const vinculoRLC = filterVinculoRLC(rlcObject)
+                const vinculoRLC = filterVinculoRLC(rlcInput)
                 console.log(vinculoRLC, 'VINCULA!!!')
                 //await runProcVinculo(vinculoRLC)
             }
 
             if(DesvinculoRlc) {
-                const desvinculoRLC = filterDesvinculoRLC(rlcObject)
+                const desvinculoRLC = filterDesvinculoRLC(rlcInput)
                 console.log(desvinculoRLC, 'DESVINCULA!!!')
                 //await runProcDesvinculo(desvinculoRLC)
             }
             
             const data = await getData()
-            const responseMessage = mountResponseMessage(rlcObject)
+            const responseMessage = mountResponseMessage(rlcInput)
 
             return {data, responseMessage}
 		} catch(err) {
